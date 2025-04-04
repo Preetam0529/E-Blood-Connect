@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/genderSelectionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center"
+    android:background="@drawable/app_background"
+    tools:context=".UserAuthentication">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/genderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Select Your Profile"
+        android:textColor="#333333"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <!-- Gender Selection Buttons -->
+    <LinearLayout
+        android:id="@+id/userauthenticationLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <!-- Donor Button and Name -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="20dp">
+
+            <ImageButton
+                android:id="@+id/DonorButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/donorimage"
+                android:background="@drawable/rounded_button"
+                android:scaleType="fitCenter"
+                android:clipToOutline="true"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/dname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Donor"
+                android:layout_marginTop="8dp"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <!-- Acceptor Button and Name -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginStart="20dp">
+
+            <ImageButton
+                android:id="@+id/AcceptorButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/acceptorblood"
+                android:background="@drawable/rounded_button"
+                android:scaleType="fitCenter"
+                android:clipToOutline="true"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/aname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acceptor"
+                android:layout_marginTop="8dp"
+                android:textColor="#333333"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

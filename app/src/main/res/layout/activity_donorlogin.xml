@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:padding="20dp"
+    android:background="@drawable/app_background">
+
+    <!-- App Logo -->
+    <ImageView
+        android:id="@+id/imagepattern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/blooddonate" />
+
+    <!-- Username Input -->
+    <EditText
+        android:id="@+id/Username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/text_rounded_button"
+        android:drawableLeft="@android:drawable/ic_menu_add"
+        android:drawablePadding="10dp"
+        android:hint="Enter Username"
+        android:inputType="text"
+        android:paddingLeft="20dp" />
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/text_rounded_button"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
+        android:drawablePadding="10dp"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp" />
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/buttonlogin"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:text="Sign in"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:layout_gravity="center"/>
+
+    <!-- Register Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="80dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New here?"
+            android:textSize="18sp"
+            android:textColor="#333333" />
+
+        <TextView
+            android:id="@+id/registerHere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Register Here"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:clickable="true" />
+    </LinearLayout>
+
+</LinearLayout>
