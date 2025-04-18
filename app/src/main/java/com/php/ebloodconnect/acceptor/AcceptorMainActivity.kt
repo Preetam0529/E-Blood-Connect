@@ -23,8 +23,8 @@ class AcceptorMainActivity : AppCompatActivity() {
             val selectedFragment = when (it.itemId) {
                 R.id.navigation_requests -> AcceptorRequestsFragment()
                 R.id.navigation_post -> AcceptorPostFragment()
-                R.id.navigation_map2 -> AcceptorMapFragment()
-                R.id.navigation_dashboard2 -> AcceptorDashboardFragment()
+                R.id.navigation_acceptor_map -> AcceptorMapFragment()
+                R.id.navigation_acceptor_dashboard -> AcceptorDashboardFragment()
                 else -> null
             }
             selectedFragment?.let {

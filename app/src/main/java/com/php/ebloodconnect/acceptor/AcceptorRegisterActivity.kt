@@ -8,7 +8,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.php.blooddonate.databinding.ActivityAcceptorRegistrationBinding
 
-class acceptorregisterActivity : AppCompatActivity() {
+class AcceptorRegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAcceptorRegistrationBinding
 

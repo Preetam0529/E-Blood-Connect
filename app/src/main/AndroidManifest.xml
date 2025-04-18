@@ -22,7 +22,7 @@
             android:value=""/>
 
         <activity
-            android:name=".acceptor.acceptorregisterActivity"
+            android:name=".acceptor.AcceptorRegisterActivity"
             android:exported="true" />
         <activity
             android:name=".donor.DonorRegisterActivity"

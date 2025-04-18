@@ -18,13 +18,13 @@
         tools:layout="@layout/fragment_post" />
 
     <fragment
-        android:id="@+id/navigation_map2"
+        android:id="@+id/navigation_acceptor_map"
         android:name="com.php.ebloodconnect.acceptor.AcceptorMapFragment"
         android:label="Map"
         tools:layout="@layout/fragment_acceptor_map" />
 
     <fragment
-        android:id="@+id/navigation_dashboard2"
+        android:id="@+id/navigation_acceptor_dashboard"
         android:name="com.php.ebloodconnect.acceptor.AcceptorDashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_acceptor_dashboard" />

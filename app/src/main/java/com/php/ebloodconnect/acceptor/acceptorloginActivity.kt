@@ -41,7 +41,7 @@ class acceptorloginActivity : AppCompatActivity() {
 
         // Navigate to register screen
         registerTextView.setOnClickListener {
-            val intent = Intent(this, acceptorregisterActivity::class.java)
+            val intent = Intent(this, AcceptorRegisterActivity::class.java)
             startActivity(intent)
         }
     }
