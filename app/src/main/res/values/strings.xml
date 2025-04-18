@@ -3,4 +3,13 @@
     <string name="register_here">Register here</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
+
+    <string-array name="urgency_levels">
+        <item>Select Urgency</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Critical</item>
+    </string-array>
 </resources>
+

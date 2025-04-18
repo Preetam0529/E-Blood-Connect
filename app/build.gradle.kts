@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ebloodconnect"
+    namespace = "com.php.ebloodconnect"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.ebloodconnect"
+        applicationId = "com.php.ebloodconnect"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -42,6 +42,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

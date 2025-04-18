@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.048"
-        app:srcCompat="@drawable/blooddonate" />
+        app:srcCompat="@drawable/app_logo" />
 
     <TextView
         android:layout_width="350dp"

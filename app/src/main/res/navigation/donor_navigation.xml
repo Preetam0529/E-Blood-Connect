@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/donor_navigation"
+    app:startDestination="@+id/navigation_feed">
+
+    <fragment
+        android:id="@+id/navigation_feed"
+        android:name="com.php.ebloodconnect.donor.DonorFeedFragment"
+        android:label="Feed"
+        tools:layout="@layout/fragment_feed" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.php.ebloodconnect.donor.DonorMapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_donor_map" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.php.ebloodconnect.donor.DonorDashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_donor_dashboard" />
+</navigation>

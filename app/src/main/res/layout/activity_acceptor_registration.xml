@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/app_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acceptor Registration"
+            android:textSize="24sp"
+
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Hospital Name -->
+        <EditText
+            android:id="@+id/et_hospital_name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Hospital Name"
+            android:layout_gravity="center"
+            android:inputType="textCapWords"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginTop="66dp" />
+
+        <!-- Admin Person Name -->
+        <EditText
+            android:id="@+id/et_admin_person"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            android:hint="Admin Person Name"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ID Proof Upload -->
+        <Button
+            android:id="@+id/btn_upload_id"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="Upload ID Proof"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/light_red"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Contact Number -->
+        <EditText
+            android:id="@+id/et_contact_number"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_height="wrap_content"
+            android:hint="Contact Number"
+            android:inputType="phone"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/Pass1"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/pass2"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_height="wrap_content"
+            android:hint="Re-enter Password"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Location Button -->
+        <Button
+            android:id="@+id/btn_select_location"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_height="wrap_content"
+            android:text="Select Location"
+            android:backgroundTint="@color/light_red"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Submit -->
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,85 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="top"
-    android:padding="20dp"
-    android:background="@drawable/app_background">
+    android:background="@drawable/app_background"
+    android:padding="20dp">
 
-    <!-- App Logo -->
-    <ImageView
-        android:id="@+id/appLogo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/blooddonate"
-        android:layout_marginTop="70dp"
-        android:layout_gravity="center"/>
+        android:orientation="vertical"
+        android:gravity="top|center_horizontal">
 
-    <!-- Username -->
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/text_rounded_button"
-        android:drawableLeft="@android:drawable/ic_menu_add"
-        android:drawablePadding="10dp"
-        android:hint="Enter Username"
-        android:inputType="text"
-        android:paddingLeft="20dp" />
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/app_logo"
+            android:layout_gravity="center" />
 
-    <!-- Email -->
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_rounded_button"
-        android:drawableLeft="@android:drawable/ic_dialog_email"
-        android:drawablePadding="10dp"
-        android:hint="Enter Email"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="20dp" />
+        <!-- Full Name -->
+        <EditText
+            android:id="@+id/etFullName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp" />
 
-    <!-- Password -->
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_rounded_button"
-        android:drawableLeft="@android:drawable/ic_lock_lock"
-        android:drawablePadding="10dp"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp" />
+        <!-- Gender Spinner -->
+        <Spinner
+            android:id="@+id/spinnerGender"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:paddingLeft="10dp" />
 
-    <!-- Confirm Password -->
-    <EditText
-        android:id="@+id/etConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_rounded_button"
-        android:drawableLeft="@android:drawable/ic_lock_lock"
-        android:drawablePadding="10dp"
-        android:hint="@string/confirm_password"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp" />
+        <!-- DOB -->
+        <EditText
+            android:id="@+id/etDOB"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Date of Birth (DD/MM/YYYY)"
+            android:inputType="date"
+            android:paddingLeft="20dp"
+            android:focusable="false" />
 
-    <!-- Register Button -->
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/register"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/black"
-        android:layout_gravity="center"/>
+        <!-- Email -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp" />
 
-</LinearLayout>
+        <!-- Blood Group Spinner -->
+        <Spinner
+            android:id="@+id/spinnerBloodGroup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:paddingLeft="10dp" />
+
+        <!-- Last Donation Date -->
+        <EditText
+            android:id="@+id/etLastDonation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Last Donation Date (DD/MM/YYYY)"
+            android:inputType="date"
+            android:paddingLeft="20dp"
+            android:focusable="false" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/btn_submit2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Submit"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</ScrollView>

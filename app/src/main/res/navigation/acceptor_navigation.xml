@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/acceptor_navigation"
+    app:startDestination="@+id/navigation_requests">
+
+    <fragment
+        android:id="@+id/navigation_requests"
+        android:name="com.php.ebloodconnect.acceptor.AcceptorRequestsFragment"
+        android:label="Requests"
+        tools:layout="@layout/fragment_requests" />
+
+    <fragment
+        android:id="@+id/navigation_post"
+        android:name="com.php.ebloodconnect.acceptor.AcceptorPostFragment"
+        android:label="Post"
+        tools:layout="@layout/fragment_post" />
+
+    <fragment
+        android:id="@+id/navigation_map2"
+        android:name="com.php.ebloodconnect.acceptor.AcceptorMapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_acceptor_map" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard2"
+        android:name="com.php.ebloodconnect.acceptor.AcceptorDashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_acceptor_dashboard" />
+</navigation>
