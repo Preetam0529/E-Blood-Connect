@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/app_background">
+    android:background="@drawable/app_background"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +14,7 @@
         android:padding="10dp"
         android:layout_marginTop="20dp">
 
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,17 +24,17 @@
             android:textColor="@android:color/black"
             android:layout_marginBottom="24dp" />
 
-        <!-- Name -->
+        <!-- Patient Name -->
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Patient Name"
+            android:inputType="textPersonName"
             android:background="@drawable/text_rounded_button"
             android:padding="12dp"
             android:textColor="@android:color/black"
-            android:textColorHint="#000000"
-            android:layout_marginTop="20dp" />
+            android:textColorHint="#000000" />
 
         <!-- Blood Group -->
         <EditText
@@ -42,35 +42,27 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Blood Group (e.g. A+)"
+            android:inputType="text"
             android:background="@drawable/text_rounded_button"
             android:padding="12dp"
             android:textColor="@android:color/black"
             android:textColorHint="#000000"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="16dp" />
 
         <!-- Required Date -->
-        <EditText
-            android:id="@+id/editTextDate"
+        <TextView
+            android:id="@+id/textViewDate"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Required Date (DD-MM-YYYY)"
+            android:text="Select Required Date"
+            android:textSize="18sp"
             android:background="@drawable/text_rounded_button"
             android:padding="12dp"
             android:textColor="@android:color/black"
             android:textColorHint="#000000"
-            android:layout_marginTop="20dp" />
-
-        <!-- Location -->
-        <EditText
-            android:id="@+id/editTextLocation"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="Hospital/Location"
-            android:background="@drawable/text_rounded_button"
-            android:padding="12dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="#000000"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true" />
 
         <!-- Contact Number -->
         <EditText
@@ -78,22 +70,34 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Contact Number"
+            android:inputType="phone"
             android:background="@drawable/text_rounded_button"
             android:padding="12dp"
-            android:inputType="phone"
             android:textColor="@android:color/black"
             android:textColorHint="#000000"
-            android:layout_marginTop="20dp" />
-        <!-- Urgency Spinner -->
+            android:layout_marginTop="16dp" />
+
+        <!-- Urgency Level -->
         <Spinner
             android:id="@+id/spinnerUrgency"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:padding="12dp"
             android:background="@drawable/text_rounded_button"
             android:spinnerMode="dropdown" />
 
+        <!-- Acceptor Registered Location Display -->
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Location: AIIMS, Delhi"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp" />
 
         <!-- Submit Button -->
         <Button
@@ -103,7 +107,17 @@
             android:text="Submit Request"
             android:textStyle="bold"
             android:padding="12dp"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/rounded_button" />
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/white" />
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.php.ebloodconnect.acceptor.acceptorloginActivity
+import com.php.ebloodconnect.acceptor.AcceptorLoginActivity
 import com.php.ebloodconnect.donor.DonorLoginActivity
 
 class UserAuthentication : AppCompatActivity() {
@@ -23,7 +23,7 @@ class UserAuthentication : AppCompatActivity() {
 
         acceptorButton.setOnClickListener {
             // Navigate to AcceptorRegistrationActivity (You need to create this class)
-             val intent = Intent(this, acceptorloginActivity::class.java)
+             val intent = Intent(this, AcceptorLoginActivity::class.java)
              startActivity(intent)
         }
     }

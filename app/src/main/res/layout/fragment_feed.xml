@@ -43,7 +43,6 @@
                     android:id="@+id/textName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name: Ramesh Singh"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
@@ -53,7 +52,6 @@
                     android:id="@+id/textBloodGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Blood Group: B+"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_marginBottom="6dp" />
@@ -62,7 +60,6 @@
                     android:id="@+id/textUnits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Units Needed: 3"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_marginBottom="6dp" />
@@ -71,7 +68,6 @@
                     android:id="@+id/textContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contact: +91 8765432109"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_marginBottom="14dp" />

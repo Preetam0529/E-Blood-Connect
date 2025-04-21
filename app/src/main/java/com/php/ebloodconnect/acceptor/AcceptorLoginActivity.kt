@@ -1,5 +1,6 @@
-package com.php.ebloodconnect.donor
+package com.php.ebloodconnect.acceptor
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
@@ -8,31 +9,31 @@ import com.google.firebase.auth.FirebaseAuth
 import com.php.ebloodconnect.FirestoreHelper
 import com.php.ebloodconnect.R
 
-class DonorLoginActivity : AppCompatActivity() {
+class AcceptorLoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var emailEditText: EditText
+    private lateinit var hospitalNameEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var registerTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_donorlogin)
+        setContentView(R.layout.activity_acceptorlogin)
 
         auth = FirebaseAuth.getInstance()
 
-        emailEditText = findViewById(R.id.Username)
-        passwordEditText = findViewById(R.id.pass)
-        loginButton = findViewById(R.id.btn_submit)
-        registerTextView = findViewById(R.id.registerHere)
+        hospitalNameEditText = findViewById(R.id.et_hospital_admin)
+        passwordEditText = findViewById(R.id.et_password)
+        loginButton = findViewById(R.id.btn_login)
+        registerTextView = findViewById(R.id.tv_register)
 
         loginButton.setOnClickListener {
             loginUser()
         }
 
         registerTextView.setOnClickListener {
-            startActivity(Intent(this, DonorRegisterActivity::class.java))
+            startActivity(Intent(this, AcceptorRegisterActivity::class.java))
         }
     }
 
@@ -40,18 +41,17 @@ class DonorLoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // User already logged in, go to DonorMainActivity directly
-            startActivity(Intent(this, DonorMainActivity::class.java))
+            startActivity(Intent(this, AcceptorMainActivity::class.java))
             finish()
         }
     }
 
     private fun loginUser() {
-        val email = emailEditText.text.toString().trim()
+        val email = hospitalNameEditText.text.toString().trim()
         val password = passwordEditText.text.toString().trim()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -60,9 +60,9 @@ class DonorLoginActivity : AppCompatActivity() {
                 val userId = auth.currentUser?.uid ?: return@addOnSuccessListener
                 FirestoreHelper(this).saveUserRole(
                     userId,
-                    "donor",
+                    "acceptor",
                     onSuccess = {
-                        startActivity(Intent(this, DonorMainActivity::class.java))
+                        startActivity(Intent(this, AcceptorMainActivity::class.java))
                         finish()
                     },
                     onFailure = {

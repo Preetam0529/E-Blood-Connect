@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.php.ebloodconnect.FirestoreHelper
 import com.php.ebloodconnect.MainActivity
 import com.php.ebloodconnect.R
 
@@ -16,6 +18,8 @@ class DonorProfile : AppCompatActivity() {
     private lateinit var editButton: Button
     private lateinit var deleteButton: Button
     private lateinit var logoutButton: Button
+    private lateinit var firestoreHelper: FirestoreHelper
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,26 +30,25 @@ class DonorProfile : AppCompatActivity() {
         deleteButton = findViewById(R.id.buttonDeleteAccount)
         logoutButton = findViewById(R.id.buttonLogout)
 
-        // Profile Image Click (optional action)
+        auth = FirebaseAuth.getInstance()
+        firestoreHelper = FirestoreHelper(this)
+
         profileImage.setOnClickListener {
             Toast.makeText(this, "Profile image clicked!", Toast.LENGTH_SHORT).show()
         }
 
-        // Edit Button
         editButton.setOnClickListener {
             Toast.makeText(this, "Edit Details Clicked", Toast.LENGTH_SHORT).show()
-            // Navigate to edit screen if implemented
+            // TODO: Navigate to edit screen
         }
 
-        // Delete Button with confirmation
         deleteButton.setOnClickListener {
             showDeleteConfirmationDialog()
         }
 
-        // Logout Button
         logoutButton.setOnClickListener {
+            auth.signOut()
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
-            // Perform actual logout and redirect to login screen
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
@@ -58,10 +61,33 @@ class DonorProfile : AppCompatActivity() {
             .setTitle("Delete Account")
             .setMessage("Are you sure you want to permanently delete your account?")
             .setPositiveButton("Yes") { _, _ ->
-                Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show()
-                // Add delete logic
+                deleteAccount()
             }
             .setNegativeButton("No", null)
             .show()
+    }
+
+    private fun deleteAccount() {
+        val user = auth.currentUser
+        val userId = user?.uid ?: return
+
+        firestoreHelper.deleteDonorData(userId,
+            onSuccess = {
+                user.delete()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, DonorLoginActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed to delete user from Auth", Toast.LENGTH_SHORT).show()
+                    }
+            },
+            onFailure = {
+                Toast.makeText(this, "Failed to delete donor data: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 }

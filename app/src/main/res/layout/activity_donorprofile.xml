@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center"
-                android:src="@drawable/profile_image" />
+                android:src="@drawable/default_background_image" />
         </androidx.cardview.widget.CardView>
 
         <!-- Edit Details Button -->

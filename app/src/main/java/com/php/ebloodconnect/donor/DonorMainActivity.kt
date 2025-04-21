@@ -22,7 +22,7 @@ class DonorMainActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener {
             val selectedFragment = when (it.itemId) {
                 R.id.navigation_feed -> DonorFeedFragment()
-                R.id.navigation_map -> DonorMapFragment()
+//                R.id.navigation_map -> DonorMapFragment()
                 R.id.navigation_dashboard -> DonorDashboardFragment()
                 else -> null
             }

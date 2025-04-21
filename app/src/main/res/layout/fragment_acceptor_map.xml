@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/mapView"
-android:name="com.google.android.gms.maps.SupportMapFragment"
-android:layout_width="match_parent"
-android:layout_height="match_parent"/>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/acceptor_map_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
+

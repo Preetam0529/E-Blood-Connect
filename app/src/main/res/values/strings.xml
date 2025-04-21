@@ -11,5 +11,6 @@
         <item>High</item>
         <item>Critical</item>
     </string-array>
+    <string name="mapbox_access_token">sk.eyJ1IjoicHJlZXRhbTI5IiwiYSI6ImNtOXA5cGVrMzAzOGwycXNmMGE4NmxpM3kifQ.RtksIHjzun_JhIpCHeq3ig</string>
 </resources>
 

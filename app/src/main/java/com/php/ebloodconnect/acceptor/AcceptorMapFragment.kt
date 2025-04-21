@@ -1,50 +1,87 @@
-package com.php.ebloodconnect.acceptor
-
-import android.Manifest
-import android.app.Fragment
-import android.content.pm.PackageManager
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import com.php.ebloodconnect.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-
-class AcceptorMapFragment : Fragment(), OnMapReadyCallback {
-
-    private lateinit var googleMap: GoogleMap
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.fragment_acceptor_map, container, false)
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
-        return view
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
-        enableUserLocation()
-
-        // Sample donor location
-        val donor1 = LatLng(28.6139, 77.2090) // Delhi
-        googleMap.addMarker(MarkerOptions().position(donor1).title("Donor: Ramesh"))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(donor1, 12f))
-    }
-
-    private fun enableUserLocation() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            googleMap.isMyLocationEnabled = true
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
-        }
-    }
-}
+//package com.php.ebloodconnect.acceptor
+//
+//import android.os.Bundle
+//import android.view.LayoutInflater
+//import android.view.View
+//import android.view.ViewGroup
+//import androidx.fragment.app.Fragment
+//import com.mapbox.geojson.Point
+//import com.mapbox.maps.MapView
+//import com.mapbox.maps.Style
+//import com.mapbox.maps.plugin.annotation.AnnotationConfig
+//import com.mapbox.maps.plugin.annotation.annotations
+//import com.mapbox.maps.plugin.annotation.generated.PointAnnotation
+//import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
+//import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
+//import com.google.firebase.firestore.FirebaseFirestore
+//import com.php.ebloodconnect.R
+//
+//class AcceptorMapFragment : Fragment() {
+//
+//    private lateinit var mapView: MapView
+//    private lateinit var annotationManager: PointAnnotationManager
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        val view = inflater.inflate(R.layout.fragment_acceptor_map, container, false)
+//        mapView = view.findViewById(R.id.mapView)
+//
+//        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) { style ->
+//            setupAnnotationManager()
+//            fetchAndShowDonors()
+//        }
+//
+//        return view
+//    }
+//
+//    private fun setupAnnotationManager() {
+//        val annotationApi = mapView.annotations
+//        annotationManager = annotationApi.createPointAnnotationManager(AnnotationConfig())
+//    }
+//
+//    private fun fetchAndShowDonors() {
+//        val firestore = FirebaseFirestore.getInstance()
+//        val donorsRef = firestore.collection("donors")
+//
+//        donorsRef.get().addOnSuccessListener { documents ->
+//            for (document in documents) {
+//                val lat = document.getDouble("latitude")
+//                val lon = document.getDouble("longitude")
+//                val name = document.getString("name")
+//
+//                if (lat != null && lon != null) {
+//                    addDonorMarker(lat, lon, name ?: "Donor")
+//                }
+//            }
+//        }
+//    }
+//
+//    private fun addDonorMarker(latitude: Double, longitude: Double, title: String) {
+//        val point = Point.fromLngLat(longitude, latitude)
+//
+//        val pointAnnotationOptions = PointAnnotation.Options()
+//            .withPoint(point)
+//            .withTextField(title)
+//            .withIconImage("marker-15") // default Mapbox marker icon
+//
+//        annotationManager.create(pointAnnotationOptions)
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        mapView.onStop()
+//        mapView.onDestroy()
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        mapView.onStart()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        mapView.onStop()
+//    }
+//}

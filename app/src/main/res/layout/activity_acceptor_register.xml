@@ -11,18 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Acceptor Registration"
-            android:textSize="24sp"
-
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginBottom="24dp" />
+        android:layout_marginTop="10dp">
 
         <!-- Hospital Name -->
         <EditText
@@ -30,108 +19,111 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Hospital Name"
-            android:layout_gravity="center"
             android:inputType="textCapWords"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginTop="66dp" />
+            android:layout_marginTop="66dp"
+            android:layout_gravity="center" />
 
-        <!-- Admin Person Name -->
+        <!-- Admin Name -->
         <EditText
             android:id="@+id/et_admin_person"
             android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
             android:hint="Admin Person Name"
             android:inputType="textPersonName"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center" />
 
-        <!-- ID Proof Upload -->
+        <!-- Upload ID Proof Button -->
         <Button
             android:id="@+id/btn_upload_id"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="Upload ID Proof"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/light_red"
-            android:textColor="@color/black"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center" />
 
         <!-- Email -->
         <EditText
             android:id="@+id/et_email"
             android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
 
         <!-- Contact Number -->
         <EditText
             android:id="@+id/et_contact_number"
             android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
             android:layout_height="wrap_content"
             android:hint="Contact Number"
             android:inputType="phone"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
 
+        <!-- Password -->
         <EditText
             android:id="@+id/Pass1"
             android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
 
+        <!-- Confirm Password -->
         <EditText
             android:id="@+id/pass2"
             android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
             android:layout_height="wrap_content"
             android:hint="Re-enter Password"
             android:inputType="textPassword"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
 
-        <!-- Location Button -->
-        <Button
-            android:id="@+id/btn_select_location"
+        <!-- Select Location Spinner -->
+        <Spinner
+            android:id="@+id/spinner_location"
             android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
             android:layout_height="wrap_content"
-            android:text="Select Location"
-            android:backgroundTint="@color/light_red"
-            android:textColor="@color/black"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
 
-        <!-- Submit -->
+        <TextView
+            android:id="@+id/tv_location_status"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="No location selected"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
+
+        <!-- Submit Button -->
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="300dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="Submit"
-            android:layout_marginTop="80dp"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/white" />
-
+            android:textColor="@color/white"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center" />
     </LinearLayout>
 </ScrollView>

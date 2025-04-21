@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "323082703938",
+    "project_id": "e-blood-connect",
+    "storage_bucket": "e-blood-connect.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323082703938:android:69cce6e59774333e06c9db",
+        "android_client_info": {
+          "package_name": "com.php.ebloodconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOr7tGCnwLsYCBvcX-DvAafP84iHpTNXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

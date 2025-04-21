@@ -75,17 +75,16 @@
             android:background="@drawable/edittext_background"
             android:paddingLeft="10dp" />
 
-        <!-- Last Donation Date -->
-        <EditText
-            android:id="@+id/etLastDonation"
+
+        <!-- Location Spinner -->
+        <Spinner
+            android:id="@+id/spinnerLocation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/edittext_background"
-            android:hint="Last Donation Date (DD/MM/YYYY)"
-            android:inputType="date"
-            android:paddingLeft="20dp"
-            android:focusable="false" />
+            android:paddingLeft="10dp" />
+
 
         <!-- Submit Button -->
         <Button

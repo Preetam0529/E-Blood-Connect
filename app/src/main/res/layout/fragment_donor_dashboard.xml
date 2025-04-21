@@ -13,6 +13,7 @@
 
         <!-- Donor Info Card --><!-- Donor Info Card -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/donorInfoCard"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -37,10 +38,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_person"
-                        android:tint="@android:color/black"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        card_view:tint="@color/black" />
 
                     <TextView
+                        android:id="@+id/tvDonorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Rahul Singh"
@@ -60,10 +62,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_blood"
-                        android:tint="@android:color/black"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        card_view:tint="@android:color/black" />
 
                     <TextView
+                        android:id="@+id/tvBloodGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" B+"
@@ -81,10 +84,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_phone"
-                        android:tint="@android:color/black"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        card_view:tint="@android:color/black" />
 
                     <TextView
+                        android:id="@+id/tvPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" +91 9876543210"
@@ -117,8 +121,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_blood_request"
-                    android:tint="@android:color/black"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"
+                    card_view:tint="@android:color/black" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -167,8 +171,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_appointments"
-                    android:tint="@android:color/black"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"
+                    card_view:tint="@android:color/black" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -217,8 +221,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_histroy"
-                    android:tint="@android:color/black"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"
+                    card_view:tint="@android:color/black" />
 
                 <LinearLayout
                     android:layout_width="0dp"
