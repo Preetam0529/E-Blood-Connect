@@ -223,42 +223,42 @@ class FirestoreHelper(requireContext: Context) {
             .addOnFailureListener { onFailure(it) }
     }
 
-    fun getDonorDetails(donorId: String, callback: (DonorData?) -> Unit) {
-        db.collection("donors")
-            .document(donorId)
-            .get()
-            .addOnSuccessListener { doc ->
-                if (doc != null && doc.exists()) {
-                    callback(doc.toObject(DonorData::class.java))
-                } else {
-                    callback(null)
-                }
-            }
-            .addOnFailureListener {
-                callback(null)
-            }
-    }
+//    fun getDonorDetails(donorId: String, callback: (DonorData?) -> Unit) {
+//        db.collection("donors")
+//            .document(donorId)
+//            .get()
+//            .addOnSuccessListener { doc ->
+//                if (doc != null && doc.exists()) {
+//                    callback(doc.toObject(DonorData::class.java))
+//                } else {
+//                    callback(null)
+//                }
+//            }
+//            .addOnFailureListener {
+//                callback(null)
+//            }
+//    }
 
-    fun getConfirmedDonorsForRequest(
-        requestId: String,
-        callback: (List<DonorConfirmation>) -> Unit
-    ) {
-        db.collection("donorConfirmations")
-            .whereEqualTo("requestId", requestId)
-            .whereEqualTo("status", "confirmed")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                val list = snapshot.documents.mapNotNull {
-                    it.toObject(DonorConfirmation::class.java)?.apply {
-                        id = it.id
-                    }
-                }
-                callback(list)
-            }
-            .addOnFailureListener {
-                callback(emptyList())
-            }
-    }
+//    fun getConfirmedDonorsForRequest(
+//        requestId: String,
+//        callback: (List<DonorConfirmation>) -> Unit
+//    ) {
+//        db.collection("donorConfirmations")
+//            .whereEqualTo("requestId", requestId)
+//            .whereEqualTo("status", "confirmed")
+//            .get()
+//            .addOnSuccessListener { snapshot ->
+//                val list = snapshot.documents.mapNotNull {
+//                    it.toObject(DonorConfirmation::class.java)?.apply {
+//                        id = it.id
+//                    }
+//                }
+//                callback(list)
+//            }
+//            .addOnFailureListener {
+//                callback(emptyList())
+//            }
+//    }
 
     // =============================
     // Get All Requests for an Acceptor (any status)

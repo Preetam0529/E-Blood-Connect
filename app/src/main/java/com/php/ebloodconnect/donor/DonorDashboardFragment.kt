@@ -58,7 +58,7 @@ class DonorDashboardFragment : Fragment() {
 
         pastDonationsCard.setOnClickListener {
             Toast.makeText(requireContext(), "Showing Donation History", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(requireContext(), DonationHistoryActivity::class.java))
+            startActivity(Intent(requireContext(), DonationHistroyActivity::class.java))
         }
 
         return view

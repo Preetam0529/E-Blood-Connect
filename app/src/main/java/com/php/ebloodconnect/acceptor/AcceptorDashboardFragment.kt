@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.php.ebloodconnect.R
-import com.php.ebloodconnect.viewrequestactivity
 
 class AcceptorDashboardFragment : Fragment() {
 
@@ -53,7 +52,7 @@ class AcceptorDashboardFragment : Fragment() {
 
         viewExistingRequestsCard.setOnClickListener {
             Toast.makeText(requireContext(), "Opening existing requests", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(requireContext(), viewrequestactivity::class.java))
+            startActivity(Intent(requireContext(), viewrequestActivity::class.java))
         }
 
         requestHistoryCard.setOnClickListener {

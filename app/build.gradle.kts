@@ -35,6 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 }
 
 dependencies {
@@ -55,15 +56,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.1")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
 
-    implementation("com.mapbox.maps:android:11.11.0")
-    implementation("com.mapbox.geojson:geojson:2.0.0")
-    implementation("com.mapbox.navigation:core:3.8.4")
-    implementation("com.mapbox.navigation:ui-components:3.8.4")
-    implementation("com.mapbox.search:mapbox-search-android-ui:2.12.0-beta.1")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
 }

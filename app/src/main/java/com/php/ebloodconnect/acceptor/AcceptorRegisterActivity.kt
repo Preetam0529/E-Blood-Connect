@@ -59,7 +59,6 @@ class AcceptorRegisterActivity : AppCompatActivity() {
         btnSubmit = findViewById(R.id.btn_submit)
         spinnerLocation = findViewById(R.id.spinner_location)
 
-        // Set up Spinner
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, savedLocations)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerLocation.adapter = adapter
@@ -132,7 +131,7 @@ class AcceptorRegisterActivity : AppCompatActivity() {
                 storageRef.putFile(idProofUri!!)
                     .addOnSuccessListener {
                         storageRef.downloadUrl.addOnSuccessListener { uri ->
-                            FirestoreHelper(requireContext()).saveAcceptorRegistrationData(
+                            FirestoreHelper(this@AcceptorRegisterActivity).saveAcceptorRegistrationData(
                                 userId,
                                 hospitalName,
                                 adminName,

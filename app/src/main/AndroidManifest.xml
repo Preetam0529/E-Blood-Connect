@@ -16,30 +16,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blooddonate"
         tools:targetApi="31">
-
-        <meta-data
-            android:name="com.mapbox.token"
-            android:value="sk.eyJ1IjoicHJlZXRhbTI5IiwiYSI6ImNtOXA5cGVrMzAzOGwycXNmMGE4NmxpM3kifQ.RtksIHjzun_JhIpCHeq3ig" />
-
         <activity
-            android:name=".acceptor.AcceptorRegisterActivity"
+            android:name=".donor.DonationHistroyActivity"
             android:exported="true" />
         <activity
-            android:name=".donor.DonorRegisterActivity"
+            android:name=".acceptor.viewrequestActivity"
             android:exported="true" />
+        <activity android:name=".acceptor.AcceptedDonorsActivity"
+            android:exported="true"/>
+        <activity android:name=".acceptor.AcceptorDashboardFragment"
+            android:exported="true"/>
+        <activity android:name=".acceptor.AcceptorLoginActivity"
+            android:exported="true"/>
+        <activity android:name=".acceptor.AcceptorMainActivity"
+            android:exported="true"/>
+        <activity android:name=".acceptor.AcceptorProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".acceptor.AcceptorRegisterActivity"
+            android:exported="true"/>
+        <activity android:name=".acceptor.RequestHistoryActivity"
+            android:exported="true"/>
+        <activity android:name=".acceptor.AcceptorRequestsFragment"
+            android:exported="true"/>
+        <activity android:name=".donor.AppointmentsActivity"
+            android:exported="true"/>
 
-        <activity
-            android:name=".donor.DonorLoginActivity"
-            android:exported="true" />
+        <activity android:name=".donor.DonorDashboardFragment"
+            android:exported="true"/>
 
-        <activity
-            android:name=".acceptor.AcceptorLoginActivity"
-            android:exported="true" />
+        <activity android:name=".donor.DonorFeedFragment"
+            android:exported="true"/>
+
+        <activity android:name=".donor.DonorLoginActivity"
+            android:exported="true"/>
+
+        <activity android:name=".donor.DonorProfile"
+            android:exported="true"/>
+
+        <activity android:name=".donor.DonorRegisterActivity"
+            android:exported="true"/>
+
+        <activity android:name=".donor.DonorRequest"
+            android:exported="true"/>
+
 
         <activity
             android:name=".UserAuthentication"
             android:exported="true" />
-
         <activity
             android:name=".SplashActivity"
             android:exported="true">

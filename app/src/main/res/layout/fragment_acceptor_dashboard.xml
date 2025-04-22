@@ -168,7 +168,7 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_view_list"
+                    android:src="@drawable/ic_list_view"
                     android:tint="@android:color/black" />
 
                 <LinearLayout
