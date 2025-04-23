@@ -70,6 +70,19 @@ class FirestoreHelper(requireContext: Context) {
             .addOnFailureListener { e -> onFailure(e) }
     }
 
+    fun saveDonorRegistrationData(
+        userId: String,
+        donorData: HashMap<String, String>,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        db.collection("donors")
+            .document(userId)
+            .set(donorData)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { onFailure(it) }
+    }
+
     // =============================
     // Posting Requests by Acceptors
     // =============================
@@ -111,19 +124,6 @@ class FirestoreHelper(requireContext: Context) {
             .get()
             .addOnSuccessListener(onSuccess)
             .addOnFailureListener(onFailure)
-    }
-
-    fun saveDonorRegistrationData(
-        userId: String,
-        donorData: HashMap<String, String>,
-        onSuccess: () -> Unit,
-        onFailure: (Exception) -> Unit
-    ) {
-        db.collection("donors")
-            .document(userId)
-            .set(donorData)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onFailure(it) }
     }
 
     fun deleteDonorData(

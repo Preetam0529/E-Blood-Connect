@@ -1,126 +1,124 @@
 package com.php.ebloodconnect.donor
 
-import com.php.ebloodconnect.R
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.php.ebloodconnect.FirestoreHelper
+import com.php.ebloodconnect.R
 import java.util.*
 
 class DonorRegisterActivity : AppCompatActivity() {
 
     private lateinit var etFullName: EditText
-    private lateinit var spinnerGender: Spinner
-    private lateinit var etDOB: EditText
     private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var etDOB: EditText
+    private lateinit var spinnerGender: Spinner
     private lateinit var spinnerBloodGroup: Spinner
     private lateinit var spinnerLocation: Spinner
     private lateinit var btnSubmit: Button
 
-    private lateinit var firestoreHelper: FirestoreHelper
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestoreHelper: FirestoreHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donorregister)
 
-        // Initialize Firebase and Firestore helper
         auth = FirebaseAuth.getInstance()
         firestoreHelper = FirestoreHelper(this)
 
-        // Binding views
+        // Bind views
         etFullName = findViewById(R.id.etFullName)
-        spinnerGender = findViewById(R.id.spinnerGender)
-        etDOB = findViewById(R.id.etDOB)
         etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPass)
+        etDOB = findViewById(R.id.etDOB)
+        spinnerGender = findViewById(R.id.spinnerGender)
         spinnerBloodGroup = findViewById(R.id.spinnerBloodGroup)
         spinnerLocation = findViewById(R.id.spinnerLocation)
         btnSubmit = findViewById(R.id.btn_submit2)
 
-        // Gender dropdown
-        val genderOptions = listOf("Select Gender", "Male", "Female", "Other")
-        spinnerGender.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
+        setupSpinners()
 
-        // Blood group dropdown
-        val bloodGroups = listOf("Select Blood Group", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-        spinnerBloodGroup.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, bloodGroups).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
-
-        // Location dropdown
-        val locations = listOf("Select City", "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Ahmedabad", "Chennai", "Kolkata", "Pune", "Jaipur", "Lucknow")
-        spinnerLocation.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, locations).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
-
-        // Date Picker for DOB
         etDOB.setOnClickListener {
-            showDatePickerDialog { date -> etDOB.setText(date) }
+            showDatePickerDialog { etDOB.setText(it) }
         }
 
-        // Submit button
         btnSubmit.setOnClickListener {
-            val fullName = etFullName.text.toString().trim()
-            val gender = spinnerGender.selectedItem.toString()
-            val dob = etDOB.text.toString().trim()
-            val email = etEmail.text.toString().trim()
-            val bloodGroup = spinnerBloodGroup.selectedItem.toString()
-            val location = spinnerLocation.selectedItem.toString()
+            registerDonor()
+        }
+    }
 
-            if (fullName.isBlank() || gender == "Select Gender" || dob.isBlank() ||
-                email.isBlank() || bloodGroup == "Select Blood Group" || location == "Select City"
-            ) {
-                Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+    private fun setupSpinners() {
+        spinnerGender.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
+            listOf("Select Gender", "Male", "Female", "Other")).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
 
-            val userId = auth.currentUser?.uid
-            if (userId == null) {
-                Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+        spinnerBloodGroup.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
+            listOf("Select Blood Group", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
 
-            val donorData = hashMapOf(
-                "userId" to userId,
-                "fullName" to fullName,
-                "gender" to gender,
-                "dob" to dob,
-                "email" to email,
-                "bloodGroup" to bloodGroup,
-                "location" to location
-            )
-
-            firestoreHelper.saveDonorRegistrationData(
-                userId,
-                donorData,
-                onSuccess = {
-                    // Optionally save role
-                    firestoreHelper.saveUserRole(userId, "Donor", onSuccess = {}, onFailure = {})
-                    Toast.makeText(this, "Donor Registered Successfully!", Toast.LENGTH_SHORT).show()
-                    finish()
-                },
-                onFailure = {
-                    Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
-                }
-            )
+        spinnerLocation.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
+            listOf("Select City", "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Ahmedabad", "Chennai", "Kolkata", "Pune", "Jaipur", "Lucknow")).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
     }
 
     private fun showDatePickerDialog(onDateSet: (String) -> Unit) {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        DatePickerDialog(this, { _, y, m, d ->
+            onDateSet(String.format("%02d/%02d/%04d", d, m + 1, y))
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+    }
 
-        val datePickerDialog = DatePickerDialog(this, { _, y, m, d ->
-            val date = "%02d/%02d/%04d".format(d, m + 1, y)
-            onDateSet(date)
-        }, year, month, day)
+    private fun registerDonor() {
+        val name = etFullName.text.toString().trim()
+        val email = etEmail.text.toString().trim()
+        val password = etPassword.text.toString().trim()
+        val dob = etDOB.text.toString().trim()
+        val gender = spinnerGender.selectedItem.toString()
+        val bloodGroup = spinnerBloodGroup.selectedItem.toString()
+        val location = spinnerLocation.selectedItem.toString()
 
-        datePickerDialog.show()
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || dob.isEmpty()
+            || gender == "Select Gender" || bloodGroup == "Select Blood Group" || location == "Select City") {
+            Toast.makeText(this, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                val userId = auth.currentUser?.uid ?: return@addOnSuccessListener
+                val donorData = hashMapOf(
+                    "userId" to userId,
+                    "fullName" to name,
+                    "email" to email,
+                    "dob" to dob,
+                    "gender" to gender,
+                    "bloodGroup" to bloodGroup,
+                    "location" to location
+                )
+
+                firestoreHelper.saveDonorRegistrationData(
+                    userId,
+                    donorData,
+                    onSuccess = {
+                        Toast.makeText(this, "Donor registered successfully!", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, DonorMainActivity::class.java))
+                        finish()
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "Firestore error: ${it.message}", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Firebase Auth error: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
