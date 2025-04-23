@@ -24,8 +24,6 @@
             android:exported="true" />
         <activity android:name=".acceptor.AcceptedDonorsActivity"
             android:exported="true"/>
-        <activity android:name=".acceptor.AcceptorDashboardFragment"
-            android:exported="true"/>
         <activity android:name=".acceptor.AcceptorLoginActivity"
             android:exported="true"/>
         <activity android:name=".acceptor.AcceptorMainActivity"
@@ -36,29 +34,16 @@
             android:exported="true"/>
         <activity android:name=".acceptor.RequestHistoryActivity"
             android:exported="true"/>
-        <activity android:name=".acceptor.AcceptorRequestsFragment"
-            android:exported="true"/>
         <activity android:name=".donor.AppointmentsActivity"
             android:exported="true"/>
-
-        <activity android:name=".donor.DonorDashboardFragment"
+        <activity android:name=".donor.DonorMainActivity"
             android:exported="true"/>
-
-        <activity android:name=".donor.DonorFeedFragment"
-            android:exported="true"/>
-
         <activity android:name=".donor.DonorLoginActivity"
             android:exported="true"/>
-
         <activity android:name=".donor.DonorProfile"
             android:exported="true"/>
-
         <activity android:name=".donor.DonorRegisterActivity"
             android:exported="true"/>
-
-        <activity android:name=".donor.DonorRequest"
-            android:exported="true"/>
-
 
         <activity
             android:name=".UserAuthentication"

@@ -26,7 +26,7 @@ class AcceptorLoginActivity : AppCompatActivity() {
         hospitalNameEditText = findViewById(R.id.et_hospital_admin)
         passwordEditText = findViewById(R.id.et_password)
         loginButton = findViewById(R.id.btn_login)
-        registerTextView = findViewById(R.id.tv_register)
+        registerTextView = findViewById(R.id.tv_registerHere)
 
         loginButton.setOnClickListener {
             loginUser()

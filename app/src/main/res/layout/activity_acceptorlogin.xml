@@ -12,15 +12,6 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Acceptor Login"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginBottom="32dp" />
-
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
@@ -59,17 +50,33 @@
             android:textColor="@color/white"
             android:layout_marginTop="45dp" />
 
-        <!-- Clickable Text -->
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
+        <!-- Register Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New here? Register here"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:clickable="true"
-            android:focusable="true" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="80dp">
+
+            <TextView
+                android:id="@+id/tv_newHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New here?"
+                android:textSize="18sp"
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/tv_registerHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Register Here"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:clickable="true" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

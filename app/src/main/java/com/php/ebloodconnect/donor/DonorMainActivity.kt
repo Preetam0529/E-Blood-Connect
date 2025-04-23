@@ -16,19 +16,19 @@ class DonorMainActivity : AppCompatActivity() {
 
         // Default fragment
         supportFragmentManager.beginTransaction()
-            .replace(R.id.donorFragmentContainer, DonorDashboardFragment())
+            .replace(R.id.donorFragmentContainer, DonorFeedFragment())
             .commit()
 
         bottomNav.setOnItemSelectedListener {
             val selectedFragment = when (it.itemId) {
                 R.id.navigation_feed -> DonorFeedFragment()
-//                R.id.navigation_map -> DonorMapFragment()
+                R.id.navigation_map -> DonorMapFragment()
                 R.id.navigation_dashboard -> DonorDashboardFragment()
                 else -> null
             }
             selectedFragment?.let {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.donorFragmentContainer, it as Fragment)
+                    .replace(R.id.donorFragmentContainer, it)
                     .commit()
             }
             true
