@@ -49,14 +49,13 @@ class AcceptorRequestsFragment : Fragment() {
                     val contact = requestDoc.getString("contact") ?: "N/A"
                     val location = requestDoc.getString("locationName") ?: "N/A"
 
-                    // For each request, get donor confirmations
                     firestoreHelper.getDonorConfirmationsForRequest(
                         requestId,
                         onSuccess = { confirmationsSnapshot ->
                             for (confirmationDoc in confirmationsSnapshot) {
                                 val donorId = confirmationDoc.getString("donorId") ?: continue
+                                val status = confirmationDoc.getString("status") ?: "pending"
 
-                                // Fetch donor details
                                 firestoreHelper.getDonorDetails(
                                     donorId,
                                     onSuccess = { donorData ->
@@ -78,38 +77,71 @@ class AcceptorRequestsFragment : Fragment() {
                                         contactText.text = "Contact: $donorContact"
                                         locationText.text = "Location: $location"
 
-                                        acceptButton.setOnClickListener {
-                                            showScheduleDialog { scheduledDateTime ->
-                                                firestoreHelper.acceptDonationRequest(
-                                                    requestId,
-                                                    donorId,
-                                                    scheduledDateTime,
-                                                    onSuccess = {
-                                                        Toast.makeText(requireContext(), "Donation accepted & scheduled", Toast.LENGTH_SHORT).show()
-                                                    },
-                                                    onFailure = {
-                                                        Toast.makeText(requireContext(), "Failed to accept", Toast.LENGTH_SHORT).show()
+                                        when (status) {
+                                            "Accepted" -> {
+                                                acceptButton.visibility = View.GONE
+                                                declineButton.visibility = View.GONE
+                                                Toast.makeText(requireContext(), "$name already accepted", Toast.LENGTH_SHORT).show()
+                                            }
+                                            "Declined" -> {
+                                                acceptButton.visibility = View.GONE
+                                                declineButton.visibility = View.GONE
+                                                cardView.alpha = 0.5f
+                                            }
+                                            else -> {
+                                                acceptButton.setOnClickListener {
+                                                    showScheduleDialog { scheduledDateTime ->
+                                                        firestoreHelper.acceptDonationRequest(
+                                                            requestId,
+                                                            donorId,
+                                                            scheduledDateTime,
+                                                            onSuccess = {
+                                                                firestoreHelper.updateDonorConfirmationStatus(
+                                                                    requestId,
+                                                                    donorId,
+                                                                    "Accepted",
+                                                                    onSuccess = {
+                                                                        Toast.makeText(requireContext(), "Donation accepted & scheduled", Toast.LENGTH_SHORT).show()
+                                                                    },
+                                                                    onFailure = {
+                                                                        Toast.makeText(requireContext(), "Failed to update confirmation", Toast.LENGTH_SHORT).show()
+                                                                    }
+                                                                )
+                                                            },
+                                                            onFailure = {
+                                                                Toast.makeText(requireContext(), "Failed to accept", Toast.LENGTH_SHORT).show()
+                                                            }
+                                                        )
                                                     }
-                                                )
+                                                }
+
+                                                declineButton.setOnClickListener {
+                                                    firestoreHelper.declineDonationRequest(
+                                                        requestId,
+                                                        donorId,
+                                                        onSuccess = {
+                                                            firestoreHelper.updateDonorConfirmationStatus(
+                                                                requestId,
+                                                                donorId,
+                                                                "Declined",
+                                                                onSuccess = {
+                                                                    Toast.makeText(requireContext(), "Donation declined", Toast.LENGTH_SHORT).show()
+                                                                    requestContainer.removeView(cardView)
+                                                                },
+                                                                onFailure = {
+                                                                    Toast.makeText(requireContext(), "Failed to update status", Toast.LENGTH_SHORT).show()
+                                                                }
+                                                            )
+                                                        },
+                                                        onFailure = {
+                                                            Toast.makeText(requireContext(), "Failed to decline", Toast.LENGTH_SHORT).show()
+                                                        }
+                                                    )
+                                                }
                                             }
                                         }
 
-                                        declineButton.setOnClickListener {
-                                            firestoreHelper.declineDonationRequest(
-                                                requestId,
-                                                donorId,
-                                                onSuccess = {
-                                                    Toast.makeText(requireContext(), "Donation declined", Toast.LENGTH_SHORT).show()
-                                                    requestContainer.removeView(cardView)
-                                                },
-                                                onFailure = {
-                                                    Toast.makeText(requireContext(), "Failed to decline", Toast.LENGTH_SHORT).show()
-                                                }
-                                            )
-                                        }
-
                                         requestContainer.addView(cardView)
-
                                     },
                                     onFailure = {
                                         Toast.makeText(requireContext(), "Failed to load donor details", Toast.LENGTH_SHORT).show()

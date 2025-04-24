@@ -126,6 +126,25 @@ class FirestoreHelper(requireContext: Context) {
             .addOnFailureListener(onFailure)
     }
 
+    fun updateDonorConfirmationStatus(
+        requestId: String,
+        donorId: String,
+        status: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val updateData = mapOf("status" to status)
+
+        db.collection("donation_requests")
+            .document(requestId)
+            .collection("donorConfirmations")
+            .document(donorId)
+            .update(updateData)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { onFailure(it) }
+    }
+
+
     fun deleteDonorData(
         userId: String,
         onSuccess: () -> Unit,

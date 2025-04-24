@@ -47,7 +47,13 @@ class AcceptorDashboardFragment : Fragment() {
 
         createNewRequestCard.setOnClickListener {
             Toast.makeText(requireContext(), "Creating a new request", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(requireContext(), AcceptorPostFragment::class.java))
+
+            // ✅ Correct way to navigate to a fragment
+            val fragment = AcceptorPostFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment) // Make sure this matches your FrameLayout ID
+                .addToBackStack(null)
+                .commit()
         }
 
         viewExistingRequestsCard.setOnClickListener {
