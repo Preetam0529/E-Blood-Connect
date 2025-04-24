@@ -9,14 +9,16 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import com.php.ebloodconnect.R
+import com.google.firebase.auth.FirebaseAuth
 import com.php.ebloodconnect.FirestoreHelper
+import com.php.ebloodconnect.R
 import java.util.*
 
 class AcceptorRequestsFragment : Fragment() {
 
     private lateinit var requestContainer: LinearLayout
     private lateinit var firestoreHelper: FirestoreHelper
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,72 +28,93 @@ class AcceptorRequestsFragment : Fragment() {
 
         requestContainer = view.findViewById(R.id.requestContainer)
         firestoreHelper = FirestoreHelper(requireContext())
+        auth = FirebaseAuth.getInstance()
 
-        fetchConfirmedDonors(inflater)
+        val currentUserId = auth.currentUser?.uid
+        if (currentUserId != null) {
+            loadRequests(currentUserId, inflater)
+        }
 
         return view
     }
 
-    private fun fetchConfirmedDonors(inflater: LayoutInflater) {
-        firestoreHelper.getAllBloodRequests(
-            onSuccess = { result ->
-                for (document in result) {
-                    val requestId = document.id
-                    val bloodGroup = document.getString("bloodGroup") ?: "N/A"
-                    val contact = document.getString("contact") ?: "N/A"
-                    val location = document.getString("location") ?: "N/A"
+    private fun loadRequests(userId: String, inflater: LayoutInflater) {
+        firestoreHelper.getAllRequestsForAcceptor(
+            userId,
+            onSuccess = { requestsSnapshot ->
+                requestContainer.removeAllViews()
+                for (requestDoc in requestsSnapshot) {
+                    val requestId = requestDoc.id
+                    val bloodGroup = requestDoc.getString("bloodGroup") ?: "N/A"
+                    val contact = requestDoc.getString("contact") ?: "N/A"
+                    val location = requestDoc.getString("locationName") ?: "N/A"
 
-                    firestoreHelper.getConfirmedDonors(
-                        requestId = requestId,
-                        onSuccess = { donorResults ->
-                            for (donorDocument in donorResults) {
-                                val donorId = donorDocument.getString("donorId") ?: "Unknown"
+                    // For each request, get donor confirmations
+                    firestoreHelper.getDonorConfirmationsForRequest(
+                        requestId,
+                        onSuccess = { confirmationsSnapshot ->
+                            for (confirmationDoc in confirmationsSnapshot) {
+                                val donorId = confirmationDoc.getString("donorId") ?: continue
 
-                                val cardView = inflater.inflate(R.layout.fragment_feed, null)
-                                    .findViewById<CardView>(R.id.item_donor_request_card)
+                                // Fetch donor details
+                                firestoreHelper.getDonorDetails(
+                                    donorId,
+                                    onSuccess = { donorData ->
+                                        val cardView = inflater.inflate(R.layout.item_donor_request_card, requestContainer, false) as CardView
 
-                                val nameText = cardView.findViewById<TextView>(R.id.textName)
-                                val bloodGroupText = cardView.findViewById<TextView>(R.id.textBloodGroup)
-                                val contactText = cardView.findViewById<TextView>(R.id.textContact)
-                                val locationText = cardView.findViewById<TextView>(R.id.textUnits)
-                                val acceptButton = cardView.findViewById<Button>(R.id.buttonAccept)
-                                val declineButton = cardView.findViewById<Button>(R.id.buttonDecline)
+                                        val nameText = cardView.findViewById<TextView>(R.id.textName)
+                                        val bloodGroupText = cardView.findViewById<TextView>(R.id.textBloodGroup)
+                                        val contactText = cardView.findViewById<TextView>(R.id.textContact)
+                                        val locationText = cardView.findViewById<TextView>(R.id.textUnits)
+                                        val acceptButton = cardView.findViewById<Button>(R.id.buttonAccept)
+                                        val declineButton = cardView.findViewById<Button>(R.id.buttonDecline)
 
-                                nameText.text = "Donor: $donorId"
-                                bloodGroupText.text = "Blood Group: $bloodGroup"
-                                contactText.text = "Contact: $contact"
-                                locationText.text = "Location: $location"
+                                        val name = donorData?.get("fullName") ?: "Donor"
+                                        val donorBloodGroup = donorData?.get("bloodGroup") ?: bloodGroup
+                                        val donorContact = donorData?.get("contact") ?: contact
 
-                                acceptButton.setOnClickListener {
-                                    showScheduleDialog { scheduledDateTime ->
-                                        firestoreHelper.acceptDonationRequest(
-                                            requestId,
-                                            donorId,
-                                            scheduledDateTime,
-                                            onSuccess = {
-                                                Toast.makeText(requireContext(), "Donation accepted & donor scheduled", Toast.LENGTH_SHORT).show()
-                                            },
-                                            onFailure = {
-                                                Toast.makeText(requireContext(), "Failed to accept donation", Toast.LENGTH_SHORT).show()
+                                        nameText.text = "Donor: $name"
+                                        bloodGroupText.text = "Blood Group: $donorBloodGroup"
+                                        contactText.text = "Contact: $donorContact"
+                                        locationText.text = "Location: $location"
+
+                                        acceptButton.setOnClickListener {
+                                            showScheduleDialog { scheduledDateTime ->
+                                                firestoreHelper.acceptDonationRequest(
+                                                    requestId,
+                                                    donorId,
+                                                    scheduledDateTime,
+                                                    onSuccess = {
+                                                        Toast.makeText(requireContext(), "Donation accepted & scheduled", Toast.LENGTH_SHORT).show()
+                                                    },
+                                                    onFailure = {
+                                                        Toast.makeText(requireContext(), "Failed to accept", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                )
                                             }
-                                        )
-                                    }
-                                }
-
-                                declineButton.setOnClickListener {
-                                    firestoreHelper.declineDonationRequest(
-                                        requestId,
-                                        donorId,
-                                        onSuccess = {
-                                            Toast.makeText(requireContext(), "Donation declined", Toast.LENGTH_SHORT).show()
-                                        },
-                                        onFailure = {
-                                            Toast.makeText(requireContext(), "Failed to decline donation", Toast.LENGTH_SHORT).show()
                                         }
-                                    )
-                                }
 
-                                requestContainer.addView(cardView)
+                                        declineButton.setOnClickListener {
+                                            firestoreHelper.declineDonationRequest(
+                                                requestId,
+                                                donorId,
+                                                onSuccess = {
+                                                    Toast.makeText(requireContext(), "Donation declined", Toast.LENGTH_SHORT).show()
+                                                    requestContainer.removeView(cardView)
+                                                },
+                                                onFailure = {
+                                                    Toast.makeText(requireContext(), "Failed to decline", Toast.LENGTH_SHORT).show()
+                                                }
+                                            )
+                                        }
+
+                                        requestContainer.addView(cardView)
+
+                                    },
+                                    onFailure = {
+                                        Toast.makeText(requireContext(), "Failed to load donor details", Toast.LENGTH_SHORT).show()
+                                    }
+                                )
                             }
                         },
                         onFailure = {
@@ -108,11 +131,10 @@ class AcceptorRequestsFragment : Fragment() {
 
     private fun showScheduleDialog(onScheduleSet: (String) -> Unit) {
         val calendar = Calendar.getInstance()
-
         DatePickerDialog(requireContext(), { _, year, month, day ->
             TimePickerDialog(requireContext(), { _, hour, minute ->
-                val dateTime = String.format("%04d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute)
-                onScheduleSet(dateTime)
+                val scheduledTime = String.format("%04d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute)
+                onScheduleSet(scheduledTime)
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show()
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
     }

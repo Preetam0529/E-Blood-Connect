@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.php.ebloodconnect.FirestoreHelper
 import com.php.ebloodconnect.MainActivity
 import com.php.ebloodconnect.R
+import com.php.ebloodconnect.UserAuthentication
 
 class DonorProfile : AppCompatActivity() {
 
@@ -49,7 +50,7 @@ class DonorProfile : AppCompatActivity() {
         logoutButton.setOnClickListener {
             auth.signOut()
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, UserAuthentication::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finish()

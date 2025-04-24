@@ -45,8 +45,7 @@ class DonorFeedFragment : Fragment() {
                     val location = document.getString("location") ?: "N/A"
                     val urgency = document.getString("urgency") ?: "N/A"
 
-                    val cardView = layoutInflater.inflate(R.layout.fragment_feed, null)
-                        .findViewById<CardView>(R.id.item_donor_request_card)
+                    val cardView = inflater.inflate(R.layout.item_blood_request, requestContainer, false) as CardView
 
                     val nameText = cardView.findViewById<TextView>(R.id.textName)
                     val bloodGroupText = cardView.findViewById<TextView>(R.id.textBloodGroup)

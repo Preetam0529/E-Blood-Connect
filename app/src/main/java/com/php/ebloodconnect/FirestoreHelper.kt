@@ -223,21 +223,24 @@ class FirestoreHelper(requireContext: Context) {
             .addOnFailureListener { onFailure(it) }
     }
 
-//    fun getDonorDetails(donorId: String, callback: (DonorData?) -> Unit) {
-//        db.collection("donors")
-//            .document(donorId)
-//            .get()
-//            .addOnSuccessListener { doc ->
-//                if (doc != null && doc.exists()) {
-//                    callback(doc.toObject(DonorData::class.java))
-//                } else {
-//                    callback(null)
-//                }
-//            }
-//            .addOnFailureListener {
-//                callback(null)
-//            }
-//    }
+    fun getDonorDetails(
+        donorId: String,
+        onSuccess: (Map<String, Any>?) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        db.collection("donors")
+            .document(donorId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    onSuccess(document.data)
+                } else {
+                    onSuccess(null)
+                }
+            }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
+
 
 //    fun getConfirmedDonorsForRequest(
 //        requestId: String,
@@ -317,6 +320,45 @@ class FirestoreHelper(requireContext: Context) {
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { e -> onFailure(e) }
     }
+
+    fun markDonationFulfilled(
+        requestId: String,
+        donorId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val data = mapOf("status" to "Fulfilled")
+
+        db.collection("donation_requests")
+            .document(requestId)
+            .collection("donorConfirmations")
+            .document(donorId)
+            .update(data)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { onFailure(it) }
+    }
+
+    fun confirmDonationToRequest(
+        requestId: String,
+        donorId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val confirmation = hashMapOf(
+            "donorId" to donorId,
+            "confirmedAt" to System.currentTimeMillis()
+        )
+
+        db.collection("donation_requests")
+            .document(requestId)
+            .collection("donorConfirmations")
+            .document(donorId)
+            .set(confirmation)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { onFailure(it) }
+    }
+
+
 
     // Fetch the list of confirmed donors for an acceptor's request
     fun getDonorConfirmationsForRequest(
